@@ -1,11 +1,5 @@
 import localFont from "next/font/local";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
 
 const pretendard = localFont({
   src: "../assets/fonts/PretendardVariable.woff2",
@@ -21,9 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${inter.variable} ${pretendard.className} antialiased`}>
-        {children}
-      </body>
+      <body className={`${pretendard.className} antialiased`}>{children}</body>
     </html>
   );
 }
