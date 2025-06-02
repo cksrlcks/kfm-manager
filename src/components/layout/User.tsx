@@ -1,12 +1,12 @@
-import { Button } from "../ui/button";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 export default function User() {
   return (
     <div className="flex items-center gap-4">
       <div className="flex items-center gap-2 text-sm">
         <div className="font-semibold">김찬기</div>
-        <div className="text-xs tracking-tight text-muted-foreground">
+        <div className="text-muted-foreground text-xs tracking-tight">
           (kim@example.com)
         </div>
       </div>

@@ -1,9 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MENUS } from "@/constants";
+import { cn } from "@/lib/utils";
 
 export default function Nav() {
   const pathname = usePathname();
@@ -19,8 +19,8 @@ export default function Nav() {
               key={item.path}
               href={item.path}
               className={cn(
-                "flex w-16 cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-transparent px-2 py-3 text-sm tracking-tight text-muted-foreground hover:border-slate-100",
-                isActive && "bg-slate-50 text-foreground"
+                "text-muted-foreground flex w-16 cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-transparent px-2 py-3 text-sm tracking-tight hover:border-slate-100",
+                isActive && "text-foreground bg-slate-50",
               )}
             >
               <item.icon size={18} className="mb-1" />

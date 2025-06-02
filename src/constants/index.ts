@@ -1,5 +1,5 @@
-import { NavItem } from "@/types";
 import { LayoutDashboard, ScrollText, Settings, User } from "lucide-react";
+import { NavItem } from "@/types";
 
 export const MENUS: NavItem[] = [
   {

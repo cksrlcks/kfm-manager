@@ -1,8 +1,7 @@
+import { PropsWithChildren } from "react";
 import Logo from "@/components/layout/Logo";
 import Nav from "@/components/layout/Nav";
 import User from "@/components/layout/User";
-
-import { PropsWithChildren } from "react";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
