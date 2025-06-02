@@ -9,6 +9,10 @@ export const authClient = createAuthClient({
         confirmed: {
           type: "boolean",
         },
+        contact: {
+          type: "string",
+          required: false,
+        },
       },
     }),
   ],

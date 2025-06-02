@@ -15,6 +15,20 @@
       "when": 1748833503262,
       "tag": "0001_fantastic_puff_adder",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1748837264974,
+      "tag": "0002_lying_shinko_yamashiro",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1748839959168,
+      "tag": "0003_spotty_chamber",
+      "breakpoints": true
     }
   ]
 }
