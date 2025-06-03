@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export default function UsersPage() {
-  return <div>Users Page</div>;
+  redirect("/users/list");
 }
