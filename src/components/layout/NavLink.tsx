@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { DynamicIcon } from "lucide-react/dynamic";
 import { cn } from "@/lib/utils";
 import { NavItem } from "@/types";
 
@@ -22,7 +23,7 @@ export default function NavLink({ item }: NavLinkProps) {
         isActive && "text-foreground bg-slate-50",
       )}
     >
-      <item.icon size={18} className="mb-1" />
+      <DynamicIcon name={item.icon} size={18} className="mb-1" />
       <span className={cn("text-xs font-medium", isActive && "font-bold")}>
         {item.label}
       </span>
