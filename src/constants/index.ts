@@ -1,25 +1,31 @@
-import { LayoutDashboard, ScrollText, Settings, User } from "lucide-react";
-import { NavItem } from "@/types";
+import { NavItem, SubNavItem } from "@/types";
 
-export const MENUS: NavItem[] = [
+export const ROOT_MENUS: NavItem[] = [
   {
     label: "대시보드",
     path: "/dashboard",
-    icon: LayoutDashboard,
+    icon: "layout-dashboard",
   },
   {
     label: "내정보",
     path: "/mypage",
-    icon: Settings,
+    icon: "settings",
   },
   {
     label: "견적서",
     path: "/quotation",
-    icon: ScrollText,
+    icon: "scroll-text",
   },
   {
     label: "회원 관리",
     path: "/users",
-    icon: User,
+    icon: "user",
+  },
+];
+
+export const USERS_SUB_MENUS: SubNavItem[] = [
+  {
+    label: "회원 목록",
+    path: "/users/list",
   },
 ];

@@ -1,10 +1,12 @@
-import { LucideIcon } from "lucide-react";
+import { IconName } from "lucide-react/dynamic";
 
 export type NavItem = {
   label: string;
   path: string;
-  icon: LucideIcon;
+  icon: IconName;
 };
+
+export type SubNavItem = Omit<NavItem, "icon">;
 
 export type ServerActionResult<T = unknown> =
   | ServerActionSuccess<T>
