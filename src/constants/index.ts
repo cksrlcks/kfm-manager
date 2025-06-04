@@ -21,6 +21,16 @@ export const ROOT_MENUS: NavItem[] = [
     path: "/users",
     icon: "User",
   },
+  {
+    label: "블로워",
+    path: "/blower",
+    icon: "DraftingCompass",
+  },
+  {
+    label: "문의 관리",
+    path: "/inquiry",
+    icon: "Mail",
+  },
 ];
 
 export const USERS_SUB_MENUS: SubNavItem[] = [

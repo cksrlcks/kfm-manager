@@ -129,3 +129,76 @@
 button {
   cursor: pointer;
 }
+
+.blower-table {
+  overflow-x: auto;
+}
+
+.blower-table table {
+  table-layout: fixed;
+  width: 100%;
+  font-size: 13px;
+}
+.blower-table table,
+.blower-table th,
+.blower-table td {
+  border: 1px solid #ddd;
+}
+
+.blower-table th {
+  font-size: 13px;
+  background: #f5f5f5;
+}
+
+.blower-table th,
+.blower-table td {
+  padding: 4px;
+  text-align: center;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.blower-table td {
+  width: 100px !important;
+}
+
+.blower-table [data-selected="true"] {
+  background: #d1fae5;
+  color: #064e3b;
+  font-weight: bold;
+}
+
+.blower-table tr:has([data-selected="true"]) td:nth-child(1),
+.blower-table tr:has([data-selected="true"]) td:nth-child(2) {
+  background: #cffafe;
+  color: #134e4a;
+  font-weight: bold;
+}
+.blower-table thead tr:first-child th:nth-child(1),
+.blower-table thead tr:first-child th:nth-child(2),
+.blower-table thead tr:last-child th {
+  border-bottom: 1px solid #000;
+}
+.blower-table thead tr:first-child th:nth-child(2),
+.blower-table td:nth-child(2) {
+  border-right: 1px solid #000;
+}
+
+.blower-table thead tr:first-child th:nth-child(1),
+.blower-table thead tr:first-child th:nth-child(2),
+.blower-table td:nth-child(1),
+.blower-table td:nth-child(2) {
+  width: 50px;
+  position: sticky;
+  left: 0px;
+  z-index: 2;
+}
+
+.blower-table thead tr:first-child th:nth-child(2),
+.blower-table td:nth-child(2) {
+  left: 50px;
+}
+
+.blower-table td:nth-child(1),
+.blower-table td:nth-child(2) {
+  background: #f5f5f5;
+}
