@@ -22,7 +22,7 @@ export default function SubNavLink({ item }: NavLinkProps) {
         isActive && "bg-slate-50 font-medium",
       )}
     >
-      <span className="text-sm"> {item.label}</span>
+      <span className="text-sm">{item.label}</span>
     </Link>
   );
 }

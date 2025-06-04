@@ -1,9 +1,9 @@
-import { IconName } from "lucide-react/dynamic";
+import { icons } from "lucide-react";
 
 export type NavItem = {
   label: string;
   path: string;
-  icon: IconName;
+  icon: keyof typeof icons;
 };
 
 export type SubNavItem = Omit<NavItem, "icon">;

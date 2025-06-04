@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DynamicIcon } from "lucide-react/dynamic";
+import { icons } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NavItem } from "@/types";
 
@@ -13,6 +13,7 @@ type NavLinkProps = {
 export default function NavLink({ item }: NavLinkProps) {
   const pathname = usePathname();
   const isActive = pathname.startsWith(item.path);
+  const Icon = icons[item.icon];
 
   return (
     <Link
@@ -23,7 +24,7 @@ export default function NavLink({ item }: NavLinkProps) {
         isActive && "text-foreground bg-slate-50",
       )}
     >
-      <DynamicIcon name={item.icon} size={18} className="mb-1" />
+      <Icon size={18} className="mb-1" />
       <span className={cn("text-xs font-medium", isActive && "font-bold")}>
         {item.label}
       </span>

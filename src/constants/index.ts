@@ -4,22 +4,22 @@ export const ROOT_MENUS: NavItem[] = [
   {
     label: "대시보드",
     path: "/dashboard",
-    icon: "layout-dashboard",
+    icon: "LayoutDashboard",
   },
   {
     label: "내정보",
     path: "/mypage",
-    icon: "settings",
+    icon: "Settings",
   },
   {
     label: "견적서",
     path: "/quotation",
-    icon: "scroll-text",
+    icon: "ScrollText",
   },
   {
     label: "회원 관리",
     path: "/users",
-    icon: "user",
+    icon: "User",
   },
 ];
 
