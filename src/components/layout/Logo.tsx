@@ -1,3 +1,5 @@
+import Image from "next/image";
+import logo from "@/assets/images/logo.svg";
 import { cn } from "@/lib/utils";
 
 type LogoProps = {
@@ -6,8 +8,10 @@ type LogoProps = {
 
 export default function Logo({ className }: LogoProps) {
   return (
-    <div className={cn("font-bold", className)}>
-      KFM Blower <span className="text-muted-foreground pl-1">Manager</span>
-    </div>
+    <Image
+      src={logo}
+      alt="KFM Blower Manager"
+      className={cn("h-[18px] w-auto", className)}
+    />
   );
 }
