@@ -118,6 +118,12 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  input:disabled,
+  textarea:disabled,
+  select:disabled {
+    @apply !bg-muted !cursor-not-allowed;
+  }
 }
 
 button {
