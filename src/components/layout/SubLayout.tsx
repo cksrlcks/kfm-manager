@@ -42,7 +42,7 @@ const Body = ({ children }: PropsWithChildren) => {
 
 const Nav = ({ menus }: NavProps) => {
   return (
-    <aside className="mb-8 md:mb-0 lg:w-1/5">
+    <aside className="mb-8 lg:mb-0 lg:w-1/5">
       <nav>
         <ul className="flex w-full flex-col gap-1">
           {menus.map((item) => {

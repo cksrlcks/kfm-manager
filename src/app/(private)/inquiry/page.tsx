@@ -1,3 +1,5 @@
-export default function InquiryPage() {
-  return <div>page</div>;
+import { redirect } from "next/navigation";
+
+export default async function InquiryPage() {
+  redirect("/inquiry/kfmblower");
 }

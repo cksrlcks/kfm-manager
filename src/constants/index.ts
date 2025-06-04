@@ -39,3 +39,14 @@ export const USERS_SUB_MENUS: SubNavItem[] = [
     path: "/users/list",
   },
 ];
+
+export const INQUIRY_SUB_MENUS: SubNavItem[] = [
+  {
+    label: "kfmblower 문의",
+    path: "/inquiry/kfmblower",
+  },
+  {
+    label: "kfmbusan 문의",
+    path: "/inquiry/kfmbusan",
+  },
+];
