@@ -3,6 +3,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { admin } from "better-auth/plugins";
 import { db } from "@/db";
+import { ROLES } from "@/types";
 import { sendPasswordResetEmail } from "./email";
 
 export const auth = betterAuth({
@@ -37,9 +38,12 @@ export const auth = betterAuth({
   },
   plugins: [
     admin({
-      defaultRole: "user",
-      adminRoles: ["admin", "suerAdmin"],
+      defaultRole: ROLES.USER,
+      adminRoles: [ROLES.ADMIN],
     }),
     nextCookies(),
   ],
 });
+
+export type Session = typeof auth.$Infer.Session;
+export type User = Session["user"];

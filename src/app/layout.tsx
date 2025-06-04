@@ -9,7 +9,7 @@ const pretendard = localFont({
   variable: "--font-pretendard",
 });
 
-export default function RootLayout({
+export default function GlobalLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

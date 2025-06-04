@@ -1,17 +1,36 @@
 import { PropsWithChildren } from "react";
+import Link from "next/link";
+import LogoutButton from "@/components/LogoutButton";
 import Logo from "@/components/layout/Logo";
 import Nav from "@/components/layout/Nav";
+import RootLayout from "@/components/layout/RootLayout";
 import User from "@/components/layout/User";
+import { Button } from "@/components/ui/button";
+import { verifySession } from "@/lib/dal";
 
-export default function Layout({ children }: PropsWithChildren) {
+export default async function Layout({ children }: PropsWithChildren) {
+  await verifySession();
+
   return (
-    <div className="mx-auto max-w-screen-2xl px-8 py-6">
-      <header className="mb-2 flex h-9 items-center justify-between border-b border-slate-100 pb-4">
-        <Logo />
-        <User />
-      </header>
-      <Nav />
-      {children}
-    </div>
+    <RootLayout>
+      <RootLayout.Header>
+        <RootLayout.HeaderTop>
+          <Logo />
+          <div className="flex items-center gap-4">
+            <User />
+            <div className="flex items-center gap-2">
+              <Button asChild variant="outline">
+                <Link href="/mypage">내정보</Link>
+              </Button>
+              <LogoutButton variant="outline">로그아웃</LogoutButton>
+            </div>
+          </div>
+        </RootLayout.HeaderTop>
+        <RootLayout.HeaderBottom>
+          <Nav />
+        </RootLayout.HeaderBottom>
+      </RootLayout.Header>
+      <RootLayout.Body>{children}</RootLayout.Body>
+    </RootLayout>
   );
 }

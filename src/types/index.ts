@@ -33,3 +33,8 @@ export type MutationOption<TPayload = unknown> = {
   onSuccess?: (response: ServerActionSuccess<TPayload>) => void;
   onError?: (response: ServerActionFailure) => void;
 };
+
+export const ROLES = {
+  USER: "user",
+  ADMIN: "admin",
+} as const;

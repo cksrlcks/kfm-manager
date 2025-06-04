@@ -3,7 +3,7 @@ import { SubNavItem } from "@/types";
 import { Separator } from "../ui/separator";
 import SubNavLink from "./SubNavLink";
 
-export const SubLayout = ({ children }: PropsWithChildren) => {
+const SubLayout = ({ children }: PropsWithChildren) => {
   return <div className="space-y-4">{children}</div>;
 };
 

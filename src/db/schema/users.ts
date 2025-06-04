@@ -14,11 +14,11 @@ export const user = pgTable("user", {
   updatedAt: timestamp("updated_at")
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
-  role: text("role"),
+  role: text("role").default("user").notNull(),
   banned: boolean("banned"),
   banReason: text("ban_reason"),
   banExpires: timestamp("ban_expires"),
-  confirmed: boolean("confirmed"),
+  confirmed: boolean("confirmed").default(false).notNull(),
   contact: text("contact"),
 });
 
