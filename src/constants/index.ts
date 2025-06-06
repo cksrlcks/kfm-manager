@@ -51,6 +51,17 @@ export const INQUIRY_SUB_MENUS: SubNavItem[] = [
   },
 ];
 
+export const MYPAGE_SUB_MENUS: SubNavItem[] = [
+  {
+    label: "내 정보 수정",
+    path: "/mypage/edit-profile",
+  },
+  {
+    label: "비밀번호 변경",
+    path: "/mypage/change-password",
+  },
+];
+
 export const SITE_LISTS = [
   {
     label: "다음",
