@@ -40,8 +40,10 @@ export const ROLES = {
   ADMIN: "admin",
 } as const;
 
-export const searchParamsSchema = z.object({
-  page: z.coerce.number().int().positive().optional().default(1),
-  limit: z.coerce.number().int().positive().optional().default(10),
+export const baseFilterSchema = z.object({
+  page: z.coerce.number().int().positive().optional(),
+  limit: z.coerce.number().int().positive().optional(),
   keyword: z.string().optional(),
 });
+
+export type BaseFilter = z.infer<typeof baseFilterSchema>;
