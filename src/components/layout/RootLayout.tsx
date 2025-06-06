@@ -21,12 +21,21 @@ const HeaderBottom = ({ children }: PropsWithChildren) => {
 };
 
 const Body = ({ children }: PropsWithChildren) => {
-  return <main>{children}</main>;
+  return <main className="min-h-[70vh]">{children}</main>;
+};
+
+const Footer = () => {
+  return (
+    <footer className="text-muted-foreground my-16 text-center text-sm">
+      © {new Date().getFullYear()} KFM Blower Manager. All rights reserved.
+    </footer>
+  );
 };
 
 RootLayout.Header = Header;
 RootLayout.HeaderTop = HeaderTop;
 RootLayout.HeaderBottom = HeaderBottom;
 RootLayout.Body = Body;
+RootLayout.Footer = Footer;
 
 export default RootLayout;

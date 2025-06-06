@@ -28,6 +28,7 @@ export default function Layout({ children }: PropsWithChildren) {
         </RootLayout.HeaderBottom>
       </RootLayout.Header>
       <RootLayout.Body>{children}</RootLayout.Body>
+      <RootLayout.Footer />
     </RootLayout>
   );
 }
