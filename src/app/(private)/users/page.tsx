@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
+import { verifyAdminSession } from "@/lib/dal";
 
-export default function UsersPage() {
+export default async function UsersPage() {
+  await verifyAdminSession();
+
   redirect("/users/list");
 }

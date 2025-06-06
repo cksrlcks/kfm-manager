@@ -1,30 +1,25 @@
 import InquiryItem from "@/features/inquiry/components/InquiryItem";
-import { InquiryResponse } from "@/features/inquiry/type";
+import { getContactList } from "@/features/inquiry/server/dal";
+import { verifyAdminSession } from "@/lib/dal";
+import { searchParamsSchema } from "@/types";
 
 export default async function InquiryPage({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string; limit?: string }>;
 }) {
-  const { page = 1, limit = 10 } = await searchParams;
+  await verifyAdminSession();
 
-  const response = await fetch(
-    `${process.env.KFMBLOWER_API_URL}/get-contact.php?page=${page}&limit=${limit}`,
-    {
-      method: "GET",
-      headers: {
-        "X-API-KEY": process.env.KFMBLOWER_API_KEY || "",
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    },
-  );
+  const parsed = searchParamsSchema.safeParse(await searchParams);
 
-  if (!response.ok) {
-    throw new Error("정보를 가져오지 못했습니다.");
+  if (!parsed.success) {
+    throw new Error("Invalid search parameters");
   }
 
-  const data = (await response.json()) as InquiryResponse;
+  const data = await getContactList({
+    ...parsed.data,
+    targetSite: "kfmblower",
+  });
 
   return (
     <ul className="space-y-4">

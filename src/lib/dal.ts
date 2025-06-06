@@ -4,7 +4,8 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "./auth";
 
-export const verifySession = cache(async () => {
+export const verifyAdminSession = cache(async () => {
+  console.log("Verifying admin session...");
   const session = await auth.api.getSession({
     headers: await headers(),
   });

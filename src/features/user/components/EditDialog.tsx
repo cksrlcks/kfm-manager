@@ -82,6 +82,7 @@ export default function EditDialog({ user, children }: EditDialogProps) {
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={handleSubmit} className="space-y-4 py-2">
+            <input type="hidden" {...form.register("id")} />
             <FormField
               control={form.control}
               name="email"

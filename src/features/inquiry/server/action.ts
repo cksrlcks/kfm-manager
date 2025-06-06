@@ -1,8 +1,9 @@
 "use server";
 
-import { verifySession } from "@/lib/dal";
+import { verifyAdminSession } from "@/lib/dal";
 import { ServerActionResult } from "@/types";
 import { Inquiry } from "../type";
+import { deleteContact } from "./dal";
 
 export async function deleteContactAction({
   inquiryId,
@@ -11,26 +12,10 @@ export async function deleteContactAction({
   inquiryId: Inquiry["id"];
   targetSite: string;
 }): Promise<ServerActionResult> {
-  await verifySession();
-
-  const targetAPIUrl =
-    targetSite === "kfmblower"
-      ? process.env.KFMBLOWER_API_URL
-      : process.env.KFMBUSAN_API_URL;
+  await verifyAdminSession();
 
   try {
-    const response = await fetch(`${targetAPIUrl}/delete-contact.php`, {
-      method: "DELETE",
-      headers: {
-        "X-API-KEY": process.env.KFMBLOWER_API_KEY || "",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: inquiryId }),
-    });
-
-    if (!response.ok) {
-      throw new Error("삭제에 실패했습니다.");
-    }
+    await deleteContact(inquiryId, targetSite);
 
     return {
       success: true,

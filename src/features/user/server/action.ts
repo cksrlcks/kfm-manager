@@ -1,17 +1,15 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { eq } from "drizzle-orm";
-import { db } from "@/db";
-import { user } from "@/db/schema";
-import { verifySession } from "@/lib/dal";
+import { verifyAdminSession } from "@/lib/dal";
 import { ServerActionResult } from "@/types";
 import { UserForm, userSchema } from "../type";
+import { updateUser } from "./dal";
 
 export async function updateUserAction(
   data: UserForm,
 ): Promise<ServerActionResult> {
-  await verifySession();
+  await verifyAdminSession();
 
   const parsedData = userSchema.safeParse(data);
 
@@ -22,18 +20,8 @@ export async function updateUserAction(
     };
   }
 
-  const { email, role, contact, confirmed } = parsedData.data;
-
   try {
-    await db
-      .update(user)
-      .set({
-        role,
-        contact,
-        confirmed,
-      })
-      .where(eq(user.email, email));
-
+    await updateUser(parsedData.data);
     revalidatePath("/users/list");
 
     return {

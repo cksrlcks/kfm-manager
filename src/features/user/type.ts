@@ -4,6 +4,7 @@ import { user } from "@/db/schema";
 
 export const userSchema = createInsertSchema(user)
   .pick({
+    id: true,
     email: true,
     name: true,
     role: true,

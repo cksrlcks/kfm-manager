@@ -6,11 +6,8 @@ import Nav from "@/components/layout/Nav";
 import RootLayout from "@/components/layout/RootLayout";
 import User from "@/components/layout/User";
 import { Button } from "@/components/ui/button";
-import { verifySession } from "@/lib/dal";
 
-export default async function Layout({ children }: PropsWithChildren) {
-  await verifySession();
-
+export default function Layout({ children }: PropsWithChildren) {
   return (
     <RootLayout>
       <RootLayout.Header>

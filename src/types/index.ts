@@ -1,4 +1,5 @@
 import { icons } from "lucide-react";
+import z from "zod";
 
 export type NavItem = {
   label: string;
@@ -38,3 +39,9 @@ export const ROLES = {
   USER: "user",
   ADMIN: "admin",
 } as const;
+
+export const searchParamsSchema = z.object({
+  page: z.coerce.number().int().positive().optional().default(1),
+  limit: z.coerce.number().int().positive().optional().default(10),
+  keyword: z.string().optional(),
+});
