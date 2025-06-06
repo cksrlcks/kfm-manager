@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { auth } from "./auth";
 
 export const verifyAdminSession = cache(async () => {
-  console.log("Verifying admin session...");
   const session = await auth.api.getSession({
     headers: await headers(),
   });
