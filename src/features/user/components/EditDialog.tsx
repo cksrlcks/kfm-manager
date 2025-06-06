@@ -52,6 +52,7 @@ export default function EditDialog({ user, children }: EditDialogProps) {
       email: user.email,
       name: user.name,
       contact: user.contact || undefined,
+      position: user.position || undefined,
       role: user.role || ROLES.USER,
       confirmed: user.confirmed,
     },
@@ -124,6 +125,23 @@ export default function EditDialog({ user, children }: EditDialogProps) {
                   <FormControl>
                     <Input
                       placeholder="연락처를 입력해주세요"
+                      {...field}
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="position"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>직책</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="직책을 입력해주세요"
                       {...field}
                       value={field.value || ""}
                     />

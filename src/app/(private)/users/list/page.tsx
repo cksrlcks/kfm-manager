@@ -30,6 +30,7 @@ export default async function UserListPage() {
             <TableHead>No</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>이름</TableHead>
+            <TableHead>직책</TableHead>
             <TableHead>권한</TableHead>
             <TableHead>승인됨</TableHead>
             <TableHead>생성일</TableHead>
@@ -42,6 +43,7 @@ export default async function UserListPage() {
               <TableCell>{index + 1}</TableCell>
               <TableCell>{item.email}</TableCell>
               <TableCell>{item.name}</TableCell>
+              <TableCell>{item.position || "-"}</TableCell>
               <TableCell>{item.role}</TableCell>
               <TableCell>
                 {item.confirmed ? (

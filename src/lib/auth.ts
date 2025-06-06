@@ -28,6 +28,10 @@ export const auth = betterAuth({
         type: "string",
         required: false,
       },
+      position: {
+        type: "string",
+        required: false,
+      },
     },
   },
   session: {

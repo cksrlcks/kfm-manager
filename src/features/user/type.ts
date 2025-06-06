@@ -9,6 +9,7 @@ export const userSchema = createInsertSchema(user)
     name: true,
     role: true,
     contact: true,
+    position: true,
     confirmed: true,
   })
   .extend({

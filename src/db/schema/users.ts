@@ -20,6 +20,7 @@ export const user = pgTable("user", {
   banExpires: timestamp("ban_expires"),
   confirmed: boolean("confirmed").default(false).notNull(),
   contact: text("contact"),
+  position: text("position"),
 });
 
 export const session = pgTable("session", {
