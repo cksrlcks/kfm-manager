@@ -40,7 +40,7 @@ export default async function InquiryPage({
       <SubHeader>
         <SubHeader.Title>문의 목록</SubHeader.Title>
         <SubHeader.Description>
-          kfmblower로 수신된 문의 목록입니다.
+          kfmbusan로 수신된 문의 목록입니다.
         </SubHeader.Description>
       </SubHeader>
       <Table className="mb-10 table-fixed">

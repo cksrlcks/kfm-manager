@@ -48,6 +48,7 @@ export default function EditDialog({ user, children }: EditDialogProps) {
   const form = useForm<UserForm>({
     resolver: zodResolver(userSchema),
     defaultValues: {
+      id: user.id,
       email: user.email,
       name: user.name,
       contact: user.contact || undefined,
@@ -56,7 +57,7 @@ export default function EditDialog({ user, children }: EditDialogProps) {
     },
   });
 
-  const { mutate } = useUserMutation({
+  const { mutate: editAction, isPending: isEditPending } = useUserMutation({
     onSuccess: ({ message }) => {
       router.refresh();
       setIsOpen(false);
@@ -66,9 +67,10 @@ export default function EditDialog({ user, children }: EditDialogProps) {
       toast.error(error.message);
     },
   });
-  const handleSubmit = form.handleSubmit(async (data) => {
-    await mutate(data);
-  });
+
+  const handleSubmit = form.handleSubmit(editAction);
+
+  const isDisabledSubmit = !form.formState.isValid || isEditPending;
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -90,13 +92,7 @@ export default function EditDialog({ user, children }: EditDialogProps) {
                 <FormItem>
                   <FormLabel>이메일</FormLabel>
                   <FormControl>
-                    <Input
-                      id="email"
-                      type="email"
-                      {...field}
-                      readOnly
-                      disabled
-                    />
+                    <Input type="email" {...field} readOnly disabled />
                   </FormControl>
                 </FormItem>
               )}
@@ -184,7 +180,9 @@ export default function EditDialog({ user, children }: EditDialogProps) {
               )}
             />
             <DialogFooter>
-              <Button type="submit">저장</Button>
+              <Button type="submit" disabled={isDisabledSubmit}>
+                저장
+              </Button>
             </DialogFooter>
           </form>
         </Form>

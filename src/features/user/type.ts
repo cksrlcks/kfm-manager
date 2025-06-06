@@ -21,3 +21,19 @@ export const userSchema = createInsertSchema(user)
   });
 
 export type UserForm = z.infer<typeof userSchema>;
+
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string(),
+    newPassword: z.string().regex(/^(?=.*[^A-Za-z0-9]).{8,}$/, {
+      message: "비밀번호는 8자 이상이며, 특수문자를 포함해야 합니다.",
+    }),
+    confirmNewPassword: z.string().regex(/^(?=.*[^A-Za-z0-9]).{8,}$/, {
+      message: "비밀번호는 8자 이상이며, 특수문자를 포함해야 합니다.",
+    }),
+  })
+  .refine((data) => data.newPassword === data.confirmNewPassword, {
+    message: "새 비밀번호가 일치하지 않습니다.",
+  });
+
+export type changePasswordForm = z.infer<typeof changePasswordSchema>;
