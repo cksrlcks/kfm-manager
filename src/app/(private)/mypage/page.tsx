@@ -1,7 +1,5 @@
-import { verifyAdminSession } from "@/lib/dal";
+import { redirect } from "next/navigation";
 
 export default async function MyPage() {
-  await verifyAdminSession();
-
-  return <div>My Page</div>;
+  redirect("/mypage/edit-profile");
 }

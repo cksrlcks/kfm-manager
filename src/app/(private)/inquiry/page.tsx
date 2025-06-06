@@ -1,8 +1,5 @@
 import { redirect } from "next/navigation";
-import { verifyAdminSession } from "@/lib/dal";
 
-export default async function InquiryPage() {
-  await verifyAdminSession();
-
+export default function InquiryPage() {
   redirect("/inquiry/kfmblower");
 }
