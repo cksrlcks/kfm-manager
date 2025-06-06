@@ -4,6 +4,7 @@ import LogoutButton from "@/components/LogoutButton";
 import Logo from "@/components/layout/Logo";
 import Nav from "@/components/layout/Nav";
 import RootLayout from "@/components/layout/RootLayout";
+import Tools from "@/components/layout/Tools";
 import User from "@/components/layout/User";
 import { Button } from "@/components/ui/button";
 
@@ -25,6 +26,7 @@ export default function Layout({ children }: PropsWithChildren) {
         </RootLayout.HeaderTop>
         <RootLayout.HeaderBottom>
           <Nav />
+          <Tools />
         </RootLayout.HeaderBottom>
       </RootLayout.Header>
       <RootLayout.Body>{children}</RootLayout.Body>

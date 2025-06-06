@@ -17,7 +17,9 @@ const HeaderTop = ({ children }: PropsWithChildren) => {
 };
 
 const HeaderBottom = ({ children }: PropsWithChildren) => {
-  return <>{children}</>;
+  return (
+    <div className="mb-6 flex items-center justify-between">{children}</div>
+  );
 };
 
 const Body = ({ children }: PropsWithChildren) => {
