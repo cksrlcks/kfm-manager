@@ -21,6 +21,7 @@ export const user = pgTable("user", {
   confirmed: boolean("confirmed").default(false).notNull(),
   contact: text("contact"),
   position: text("position"),
+  display: boolean("display").default(false).notNull(),
 });
 
 export const session = pgTable("session", {

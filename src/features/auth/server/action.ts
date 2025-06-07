@@ -27,7 +27,7 @@ export const signupAction = async (
 
   try {
     await auth.api.signUpEmail({
-      body: { ...parsedData.data, confirmed: false },
+      body: { ...parsedData.data, confirmed: false, display: false },
     });
 
     return {

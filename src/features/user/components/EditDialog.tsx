@@ -197,6 +197,26 @@ export default function EditDialog({ user, children }: EditDialogProps) {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="display"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>작성자 노출</FormLabel>
+                  <div className="flex items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-4">
+                    <FormDescription>
+                      견적서의 작성자에 노출합니다.
+                    </FormDescription>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                  </div>
+                </FormItem>
+              )}
+            />
             <DialogFooter>
               <Button type="submit" disabled={isDisabledSubmit}>
                 저장

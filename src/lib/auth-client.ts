@@ -17,6 +17,10 @@ export const authClient = createAuthClient({
           type: "string",
           required: false,
         },
+        display: {
+          type: "boolean",
+          default: false,
+        },
       },
     }),
   ],

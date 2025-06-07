@@ -11,6 +11,7 @@ export const userSchema = createInsertSchema(user)
     contact: true,
     position: true,
     confirmed: true,
+    display: true,
   })
   .extend({
     contact: z
