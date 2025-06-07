@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import QuotationForm from "@/features/quotation/components/QuotationForm";
 import {
-  getDefaultSettings,
+  getDefaultSetting,
+  getEmployees,
   getQuotation,
 } from "@/features/quotation/server/dal";
 
@@ -11,9 +12,10 @@ export default async function EditPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const [data, { defaultSettings, employees }] = await Promise.all([
+  const [data, defaultSetting, employees] = await Promise.all([
     getQuotation(Number(id)),
-    getDefaultSettings(),
+    getDefaultSetting(),
+    getEmployees(),
   ]);
 
   if (!data) {
@@ -22,7 +24,7 @@ export default async function EditPage({
 
   return (
     <QuotationForm
-      defaultSettings={defaultSettings}
+      defaultSetting={defaultSetting}
       employees={employees}
       initialData={data}
     />

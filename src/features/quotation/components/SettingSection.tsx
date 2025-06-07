@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 
 const Section = ({ children }: PropsWithChildren) => {
-  return <div>{children}</div>;
+  return <div className="space-y-4">{children}</div>;
 };
 
 const Title = ({ children }: PropsWithChildren) => {

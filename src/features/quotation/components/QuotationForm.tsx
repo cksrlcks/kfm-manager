@@ -45,7 +45,9 @@ import { ACCESSORY, COMPANY_NAME } from "@/constants/quotation";
 import { formatDate, formatPriceWithComma } from "@/lib/format";
 import { addQuotationAction, updateQuotationAction } from "../server/action";
 import {
+  Employee,
   Quotation,
+  QuotationDefaultSetting,
   QuotationForm as QuotationFormType,
   quotationSchema,
 } from "../type";
@@ -54,14 +56,8 @@ import CopyTextButton from "./CopyTextButton";
 import QuotationPreview from "./Preview";
 
 type QuotationFormProps = {
-  defaultSettings: {
-    symbols: string[];
-    payment_term: string;
-    delivery_term: number;
-    delivery_condition: string;
-    price_valid: number;
-  };
-  employees: { id: string; name: string; position?: string | null }[];
+  defaultSetting: QuotationDefaultSetting | undefined;
+  employees: Employee[];
   initialData?: Quotation;
 };
 
@@ -82,7 +78,7 @@ const categoryDefault = {
 };
 
 export default function QuotationForm({
-  defaultSettings,
+  defaultSetting,
   employees,
   initialData,
 }: QuotationFormProps) {
@@ -104,10 +100,10 @@ export default function QuotationForm({
           quotation_date: new Date().toISOString(),
           company_name: "",
           quotation_amount: 0,
-          payment_term: defaultSettings.payment_term,
-          delivery_term: defaultSettings.delivery_term,
-          delivery_condition: defaultSettings.delivery_condition,
-          price_valid: defaultSettings.price_valid,
+          payment_term: defaultSetting?.payment_term || "",
+          delivery_term: defaultSetting?.delivery_term || 0,
+          delivery_condition: defaultSetting?.delivery_condition || "",
+          price_valid: defaultSetting?.price_valid || 0,
           prepared:
             `${COMPANY_NAME} ${employees[0]?.position} ${employees[0]?.name}` ||
             "",
@@ -217,9 +213,12 @@ export default function QuotationForm({
           <div className="mb-8 rounded-md border p-4">
             <div className="mb-2 text-sm font-medium">자주쓰는 기호 모음</div>
             <div className="flex flex-wrap gap-1">
-              {defaultSettings.symbols.map((symbol, index) => (
-                <CopyTextButton key={index}>{symbol}</CopyTextButton>
-              ))}
+              {defaultSetting &&
+                defaultSetting.symbols
+                  ?.split(",")
+                  .map((symbol, index) => (
+                    <CopyTextButton key={index}>{symbol.trim()}</CopyTextButton>
+                  ))}
             </div>
           </div>
           <div className="flex flex-col gap-16 xl:flex-row">

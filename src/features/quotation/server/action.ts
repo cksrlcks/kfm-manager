@@ -3,8 +3,18 @@
 import { revalidateTag } from "next/cache";
 import { verifyAdminSession } from "@/lib/dal";
 import { ServerActionResult } from "@/types";
-import { Quotation, QuotationForm, quotationSchema } from "../type";
-import { addQuotation, removeQuotation, updateQuotation } from "./dal";
+import {
+  Quotation,
+  QuotationDefaultSettingForm,
+  QuotationForm,
+  quotationSchema,
+} from "../type";
+import {
+  addQuotation,
+  removeQuotation,
+  updateDefaultSettings,
+  updateQuotation,
+} from "./dal";
 
 export const addQuotationAction = async (
   data: QuotationForm,
@@ -21,23 +31,16 @@ export const addQuotationAction = async (
   }
 
   try {
-    const result = await addQuotation(parsed.data);
+    await addQuotation(parsed.data);
 
-    if (result) {
-      revalidateTag("quotation");
-
-      return {
-        success: true,
-        message: "견적서 작성을 성공했습니다.",
-      };
-    } else {
-      return {
-        success: false,
-        message: "견적서 작성에 문제가 생겼어요",
-      };
-    }
+    revalidateTag("quotation");
+    return {
+      success: true,
+      message: "견적서 작성을 성공했습니다.",
+    };
   } catch (error) {
-    console.log(error);
+    console.error(error);
+
     return {
       success: false,
       message: "견적서 작성에 문제가 생겼어요",
@@ -59,23 +62,17 @@ export const updateQuotationAction = async (
   }
 
   try {
-    const result = await updateQuotation(id, data);
+    await updateQuotation(id, data);
 
-    if (result) {
-      revalidateTag("quotation");
+    revalidateTag("quotation");
 
-      return {
-        success: true,
-        message: "견적서 작성을 수정했습니다.",
-      };
-    } else {
-      return {
-        success: false,
-        message: "견적서 수정에 문제가 생겼어요",
-      };
-    }
+    return {
+      success: true,
+      message: "견적서 작성을 수정했습니다.",
+    };
   } catch (error) {
-    console.log(error);
+    console.error(error);
+
     return {
       success: false,
       message: "견적서 수정성에 문제가 생겼어요",
@@ -85,26 +82,44 @@ export const updateQuotationAction = async (
 
 export const removeQuotationAction = async (id: Quotation["id"]) => {
   try {
-    const result = await removeQuotation(id);
+    await removeQuotation(id);
 
-    if (result) {
-      revalidateTag("quotation");
+    revalidateTag("quotation");
 
-      return {
-        success: true,
-        message: "삭제했습니다.",
-      };
-    } else {
-      return {
-        success: false,
-        message: "삭제를 실패했습니다.",
-      };
-    }
+    return {
+      success: true,
+      message: "삭제했습니다.",
+    };
   } catch (error) {
-    console.log(error);
+    console.error(error);
+
     return {
       success: false,
       message: "삭제를 실패했습니다.",
+    };
+  }
+};
+
+export const updateDefaultSettingAction = async (
+  data: QuotationDefaultSettingForm,
+) => {
+  await verifyAdminSession();
+
+  try {
+    await updateDefaultSettings(data);
+
+    revalidateTag("default-setting");
+
+    return {
+      success: true,
+      message: "기본 설정을 업데이트했습니다.",
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      success: false,
+      message: "기본 설정 업데이트에 문제가 생겼어요",
     };
   }
 };

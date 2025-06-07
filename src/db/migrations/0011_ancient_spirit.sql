@@ -1,0 +1,1 @@
+ALTER TABLE "quotation_default_settings" ALTER COLUMN "symbols" SET DATA TYPE text;

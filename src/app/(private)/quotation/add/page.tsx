@@ -1,10 +1,16 @@
 import QuotationForm from "@/features/quotation/components/QuotationForm";
-import { getDefaultSettings } from "@/features/quotation/server/dal";
+import {
+  getDefaultSetting,
+  getEmployees,
+} from "@/features/quotation/server/dal";
 
 export default async function AddPage() {
-  const { defaultSettings, employees } = await getDefaultSettings();
+  const [defaultSetting, employees] = await Promise.all([
+    getDefaultSetting(),
+    getEmployees(),
+  ]);
 
   return (
-    <QuotationForm defaultSettings={defaultSettings} employees={employees} />
+    <QuotationForm defaultSetting={defaultSetting} employees={employees} />
   );
 }

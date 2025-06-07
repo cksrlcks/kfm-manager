@@ -1,7 +1,8 @@
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
 import { ACCESSORY } from "@/constants/quotation";
-import { quotations } from "@/db/schema";
+import { quotationDefaultSettings, quotations } from "@/db/schema";
+import { User } from "@/lib/auth";
 
 export const productItemSchema = z.object({
   description: z.string(),
@@ -46,3 +47,21 @@ export const quotationSchema = createInsertSchema(quotations).extend({
 
 export type Quotation = z.infer<typeof quotation>;
 export type QuotationForm = z.infer<typeof quotationSchema>;
+
+export const quotationDefaultSetting = createSelectSchema(
+  quotationDefaultSettings,
+);
+export const quotationDefaultSettingsSchema = createInsertSchema(
+  quotationDefaultSettings,
+)
+  .omit({ id: true })
+  .extend({
+    delivery_term: z.coerce.number().optional(),
+    price_valid: z.coerce.number().optional(),
+  });
+export type QuotationDefaultSetting = z.infer<typeof quotationDefaultSetting>;
+export type QuotationDefaultSettingForm = z.infer<
+  typeof quotationDefaultSettingsSchema
+>;
+
+export type Employee = Pick<User, "id" | "name" | "position">;

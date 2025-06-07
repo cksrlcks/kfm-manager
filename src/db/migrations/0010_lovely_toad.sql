@@ -1,0 +1,1 @@
+ALTER TABLE "quotation_default_settings" ADD COLUMN "id" integer PRIMARY KEY NOT NULL;

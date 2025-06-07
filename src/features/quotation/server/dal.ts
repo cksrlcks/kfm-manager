@@ -4,9 +4,9 @@ import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import { count, eq, ilike, or, sql } from "drizzle-orm";
 import { db } from "@/db";
-import { quotations, user } from "@/db/schema";
+import { quotationDefaultSettings, quotations, user } from "@/db/schema";
 import { BaseFilter } from "@/types";
-import { Quotation, QuotationForm } from "../type";
+import { Quotation, QuotationDefaultSettingForm, QuotationForm } from "../type";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -80,32 +80,25 @@ export const getQuotation = unstable_cache(
   },
 );
 
-export const getDefaultSettings = unstable_cache(
-  async () => {
-    //todo : db에서 가져오기
-    const defaultSettings = {
-      symbols: [
-        "*",
-        "㎥",
-        "MIN",
-        "KG",
-        "㎠",
-        "mmAq",
-        "KW",
-        "HZ",
-        "Ø",
-        "V",
-        "SL*㎥/MIN*0.KG/㎠(00mmAq)",
-        "WITH STANDARD ACCESSORY",
-        "HIGEN*TEFC*KW*60HZ*4P*380V",
-      ],
-      payment_term: "현금",
-      delivery_term: 30,
-      delivery_condition: "지정상차도",
-      price_valid: 30,
-    };
+export const removeQuotation = async (id: Quotation["id"]) => {
+  return await db.delete(quotations).where(eq(quotations.id, id));
+};
 
-    const displayedEmployees = await db.query.user.findMany({
+export const getDefaultSetting = unstable_cache(
+  async () => {
+    return await db.query.quotationDefaultSettings.findFirst({
+      where: eq(quotationDefaultSettings.id, 1),
+    });
+  },
+  ["default-setting"],
+  {
+    tags: ["default-setting"],
+  },
+);
+
+export const getEmployees = unstable_cache(
+  async () => {
+    return await db.query.user.findMany({
       where: eq(user.display, true),
       columns: {
         id: true,
@@ -113,18 +106,29 @@ export const getDefaultSettings = unstable_cache(
         position: true,
       },
     });
-
-    return {
-      defaultSettings,
-      employees: displayedEmployees,
-    };
   },
-  ["default-settings"],
+  ["employees"],
   {
     tags: ["users"],
   },
 );
 
-export const removeQuotation = async (id: Quotation["id"]) => {
-  return await db.delete(quotations).where(eq(quotations.id, id));
+export const updateDefaultSettings = async (
+  data: QuotationDefaultSettingForm,
+) => {
+  const existing = await db.query.quotationDefaultSettings.findFirst({
+    where: (fields) => eq(fields.id, 1),
+  });
+
+  if (existing) {
+    return await db
+      .update(quotationDefaultSettings)
+      .set(data)
+      .where(eq(quotationDefaultSettings.id, 1));
+  } else {
+    return await db.insert(quotationDefaultSettings).values({
+      ...data,
+      id: 1,
+    });
+  }
 };

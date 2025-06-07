@@ -34,3 +34,12 @@ export const quotations = pgTable("quotation", {
   accessory: jsonb("accessory"),
   category: jsonb("category"),
 });
+
+export const quotationDefaultSettings = pgTable("quotation_default_settings", {
+  id: integer("id").primaryKey(),
+  symbols: text("symbols"),
+  payment_term: text("payment_terms"),
+  delivery_term: integer("delivery_terms"),
+  delivery_condition: text("delivery_conditions"),
+  price_valid: integer("price_valids"),
+});
