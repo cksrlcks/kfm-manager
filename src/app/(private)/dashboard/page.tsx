@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { SITE_LISTS } from "@/constants";
+import { SITE_LISTS } from "@/constants/dashboard";
 import { verifyAdminSession } from "@/lib/dal";
 
 export default async function DashboardPage() {

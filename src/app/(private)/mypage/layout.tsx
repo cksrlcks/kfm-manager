@@ -1,18 +1,18 @@
 import { PropsWithChildren } from "react";
 import SubLayout from "@/components/layout/SubLayout";
-import { MYPAGE_SUB_MENUS } from "@/constants";
+import { MYPAGE_SUB_MENUS } from "@/constants/nav";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <SubLayout>
       <SubLayout.Header>
-        <SubLayout.Title>내정보 관리</SubLayout.Title>
+        <SubLayout.Title>{MYPAGE_SUB_MENUS.title}</SubLayout.Title>
         <SubLayout.Description>
-          내정보 관리 페이지입니다. 내정보를 확인하고 수정할 수 있습니다.
+          {MYPAGE_SUB_MENUS.description}
         </SubLayout.Description>
       </SubLayout.Header>
       <SubLayout.Body>
-        <SubLayout.Nav menus={MYPAGE_SUB_MENUS} />
+        <SubLayout.Nav menus={MYPAGE_SUB_MENUS.items} />
         <SubLayout.Content>{children}</SubLayout.Content>
       </SubLayout.Body>
     </SubLayout>

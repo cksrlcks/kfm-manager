@@ -1,4 +1,4 @@
-import { ROOT_MENUS } from "@/constants";
+import { ROOT_MENUS } from "@/constants/nav";
 import NavLink from "./NavLink";
 
 export default function Nav() {

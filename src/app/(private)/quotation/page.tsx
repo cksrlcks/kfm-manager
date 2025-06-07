@@ -1,7 +1,5 @@
-import { verifyAdminSession } from "@/lib/dal";
+import { redirect } from "next/navigation";
 
 export default async function QuotationPage() {
-  await verifyAdminSession();
-
-  return <div>Quotation Page</div>;
+  redirect("/quotation/list");
 }

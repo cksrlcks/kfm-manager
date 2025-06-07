@@ -8,6 +8,11 @@ export type NavItem = {
 };
 
 export type SubNavItem = Omit<NavItem, "icon">;
+export type SubNav = {
+  title: string;
+  description: string;
+  items: SubNavItem[];
+};
 
 export type ServerActionResult<T = unknown> =
   | ServerActionSuccess<T>
