@@ -8,6 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { formatDate } from "@/lib/format";
 import { Inquiry } from "../type";
 import InquiryActions from "./InquiryActions";
 
@@ -27,7 +28,7 @@ export default function InquiryDialog({
     { label: "회사명", value: name },
     { label: "연락처", value: contact },
     { label: "이메일", value: email },
-    { label: "등록일", value: new Date(regdate).toLocaleString("ko-KR") },
+    { label: "등록일", value: formatDate(regdate) },
     { label: "카테고리", value: category },
     { label: "상태", value: done ? "완료" : "대기" },
   ];

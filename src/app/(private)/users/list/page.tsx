@@ -12,6 +12,7 @@ import {
 import EditDialog from "@/features/user/components/EditDialog";
 import { getUserList } from "@/features/user/server/dal";
 import { verifyAdminSession } from "@/lib/dal";
+import { formatDate } from "@/lib/format";
 
 export default async function UserListPage() {
   await verifyAdminSession();
@@ -52,9 +53,7 @@ export default async function UserListPage() {
                   <Badge variant="outline">아니오</Badge>
                 )}
               </TableCell>
-              <TableCell>
-                {new Date(item.createdAt).toLocaleDateString("ko-KR")}
-              </TableCell>
+              <TableCell>{formatDate(item.createdAt, "YYYY-MM-DD")}</TableCell>
               <TableCell>
                 <EditDialog user={item}>
                   <Button variant="outline" size="sm">

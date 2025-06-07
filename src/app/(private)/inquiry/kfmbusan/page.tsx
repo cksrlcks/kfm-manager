@@ -12,6 +12,7 @@ import {
 import InquiryDialog from "@/features/inquiry/components/InquiryDialog";
 import { getContactList } from "@/features/inquiry/server/dal";
 import { verifyAdminSession } from "@/lib/dal";
+import { formatDate } from "@/lib/format";
 import { baseFilterSchema } from "@/types";
 
 export default async function InquiryPage({
@@ -77,7 +78,7 @@ export default async function InquiryPage({
                   {item.contact}
                 </TableCell>
                 <TableCell className="overflow-hidden text-ellipsis whitespace-nowrap">
-                  {new Date(item.regdate).toLocaleDateString("ko-KR")}
+                  {formatDate(item.regdate, "YYYY-MM-DD")}
                 </TableCell>
               </TableRow>
             </InquiryDialog>
