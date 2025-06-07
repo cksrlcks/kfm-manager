@@ -5,6 +5,7 @@ import {
   getEmployees,
   getQuotation,
 } from "@/features/quotation/server/dal";
+import { verifyAdminSession } from "@/lib/dal";
 
 export default async function EditPage({
   params,
@@ -12,6 +13,9 @@ export default async function EditPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+
+  await verifyAdminSession();
+
   const [data, defaultSetting, employees] = await Promise.all([
     getQuotation(Number(id)),
     getDefaultSetting(),

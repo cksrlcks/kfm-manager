@@ -1,3 +1,4 @@
+import "server-only";
 import { unstable_cache } from "next/cache";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
