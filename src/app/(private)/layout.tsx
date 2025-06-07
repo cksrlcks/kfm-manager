@@ -7,8 +7,11 @@ import RootLayout from "@/components/layout/RootLayout";
 import Tools from "@/components/layout/Tools";
 import User from "@/components/layout/User";
 import { Button } from "@/components/ui/button";
+import { verifyAdminSession } from "@/lib/dal";
 
-export default function Layout({ children }: PropsWithChildren) {
+export default async function Layout({ children }: PropsWithChildren) {
+  await verifyAdminSession();
+
   return (
     <RootLayout>
       <RootLayout.Header>

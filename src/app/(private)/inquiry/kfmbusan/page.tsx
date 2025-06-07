@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/table";
 import InquiryDialog from "@/features/inquiry/components/InquiryDialog";
 import { getContactList } from "@/features/inquiry/server/dal";
-import { verifyAdminSession } from "@/lib/dal";
 import { formatDate } from "@/lib/format";
 import { baseFilterSchema } from "@/types";
 
@@ -20,8 +19,6 @@ export default async function InquiryPage({
 }: {
   searchParams: Promise<{ page?: string; limit?: string }>;
 }) {
-  await verifyAdminSession();
-
   const parsed = baseFilterSchema.safeParse(await searchParams);
 
   if (!parsed.success) {

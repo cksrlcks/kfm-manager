@@ -11,12 +11,9 @@ import {
 } from "@/components/ui/table";
 import EditDialog from "@/features/user/components/EditDialog";
 import { getUserList } from "@/features/user/server/dal";
-import { verifyAdminSession } from "@/lib/dal";
 import { formatDate } from "@/lib/format";
 
 export default async function UserListPage() {
-  await verifyAdminSession();
-
   const { data } = await getUserList();
 
   return (
