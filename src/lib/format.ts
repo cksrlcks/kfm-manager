@@ -19,3 +19,8 @@ export function formatDate(
 
   return date.tz("Asia/Seoul").format(format);
 }
+
+export function formatPriceWithComma(price: number) {
+  if (price === 0) return null;
+  return Number(price).toLocaleString();
+}
