@@ -17,7 +17,7 @@ export const getUserList = unstable_cache(
     };
   },
   ["get-users"],
-  { tags: ["users"] },
+  { tags: ["user"] },
 );
 
 export const updateUser = async (data: UserForm) => {

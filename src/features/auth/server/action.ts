@@ -31,7 +31,7 @@ export const signupAction = async (
       body: { ...parsedData.data, confirmed: false, display: false },
     });
 
-    revalidateTag("users");
+    revalidateTag("user");
 
     return {
       success: true,

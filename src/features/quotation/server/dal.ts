@@ -110,7 +110,7 @@ export const getEmployees = unstable_cache(
   },
   ["employees"],
   {
-    tags: ["users"],
+    tags: ["user"],
   },
 );
 
