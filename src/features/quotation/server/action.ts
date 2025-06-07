@@ -1,14 +1,14 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { verifyAdminSession } from "@/lib/dal";
 import { ServerActionResult } from "@/types";
 import { Quotation, QuotationForm, quotationSchema } from "../type";
-import { addQuotation, updateQuotation } from "./dal";
+import { addQuotation, removeQuotation, updateQuotation } from "./dal";
 
-export async function addQuotationAction(
+export const addQuotationAction = async (
   data: QuotationForm,
-): Promise<ServerActionResult> {
+): Promise<ServerActionResult> => {
   await verifyAdminSession();
 
   const parsed = quotationSchema.safeParse(data);
@@ -24,7 +24,7 @@ export async function addQuotationAction(
     const result = await addQuotation(parsed.data);
 
     if (result) {
-      revalidatePath("/quotation/list");
+      revalidateTag("quotation");
 
       return {
         success: true,
@@ -43,12 +43,12 @@ export async function addQuotationAction(
       message: "견적서 작성에 문제가 생겼어요",
     };
   }
-}
+};
 
-export async function updateQuotationAction(
+export const updateQuotationAction = async (
   id: Quotation["id"],
   data: QuotationForm,
-): Promise<ServerActionResult> {
+): Promise<ServerActionResult> => {
   const parsed = quotationSchema.safeParse(data);
 
   if (!parsed.success) {
@@ -62,7 +62,7 @@ export async function updateQuotationAction(
     const result = await updateQuotation(id, data);
 
     if (result) {
-      revalidatePath("/quotation/list", "layout");
+      revalidateTag("quotation");
 
       return {
         success: true,
@@ -81,4 +81,30 @@ export async function updateQuotationAction(
       message: "견적서 수정성에 문제가 생겼어요",
     };
   }
-}
+};
+
+export const removeQuotationAction = async (id: Quotation["id"]) => {
+  try {
+    const result = await removeQuotation(id);
+
+    if (result) {
+      revalidateTag("quotation");
+
+      return {
+        success: true,
+        message: "삭제했습니다.",
+      };
+    } else {
+      return {
+        success: false,
+        message: "삭제를 실패했습니다.",
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "삭제를 실패했습니다.",
+    };
+  }
+};

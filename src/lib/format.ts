@@ -5,10 +5,10 @@ import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-export function formatDate(
+export const formatDate = (
   dateInput: string | Date,
   format: string = "YYYY-MM-DD HH:mm:ss",
-): string {
+): string => {
   const rawDate =
     typeof dateInput === "string" ? new Date(dateInput) : dateInput;
   const date = dayjs(rawDate);
@@ -18,9 +18,9 @@ export function formatDate(
   }
 
   return date.tz("Asia/Seoul").format(format);
-}
+};
 
-export function formatPriceWithComma(price: number) {
+export const formatPriceWithComma = (price: number) => {
   if (price === 0) return null;
   return Number(price).toLocaleString();
-}
+};

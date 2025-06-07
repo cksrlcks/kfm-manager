@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { auth } from "@/lib/auth";
 import { ServerActionResult } from "@/types";
 import {
@@ -29,6 +30,8 @@ export const signupAction = async (
     await auth.api.signUpEmail({
       body: { ...parsedData.data, confirmed: false, display: false },
     });
+
+    revalidateTag("users");
 
     return {
       success: true,

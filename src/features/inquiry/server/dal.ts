@@ -2,7 +2,7 @@ import "server-only";
 import { verifyAdminSession } from "@/lib/dal";
 import { InquiryResponse } from "../type";
 
-export async function getContactList({
+export const getContactList = async ({
   page,
   limit,
   targetSite,
@@ -10,7 +10,7 @@ export async function getContactList({
   page: number;
   limit: number;
   targetSite: string;
-}) {
+}) => {
   await verifyAdminSession();
 
   const targetAPIUrl =
@@ -37,9 +37,9 @@ export async function getContactList({
   const data = await response.json();
 
   return data as InquiryResponse;
-}
+};
 
-export async function deleteContact(id: string, targetSite: string) {
+export const deleteContact = async (id: string, targetSite: string) => {
   await verifyAdminSession();
 
   const targetAPIUrl =
@@ -59,4 +59,4 @@ export async function deleteContact(id: string, targetSite: string) {
   if (!response.ok) {
     throw new Error("삭제에 실패했습니다.");
   }
-}
+};

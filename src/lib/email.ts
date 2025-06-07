@@ -10,7 +10,10 @@ export const transporter = nodemailer.createTransport({
   },
 });
 
-export async function sendPasswordResetEmail(email: string, resetLink: string) {
+export const sendPasswordResetEmail = async (
+  email: string,
+  resetLink: string,
+) => {
   try {
     await transporter.sendMail({
       from: process.env.NODE_MAIL_FROM,
@@ -25,4 +28,4 @@ export async function sendPasswordResetEmail(email: string, resetLink: string) {
     console.error("메일 전송 중 오류 발생:", error);
     throw new Error("메일 전송 실패");
   }
-}
+};

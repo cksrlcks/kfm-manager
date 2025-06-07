@@ -1,14 +1,14 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { verifyAdminSession } from "@/lib/dal";
 import { ServerActionResult } from "@/types";
 import { UserForm, userSchema } from "../type";
 import { updateUser } from "./dal";
 
-export async function updateUserAction(
+export const updateUserAction = async (
   data: UserForm,
-): Promise<ServerActionResult> {
+): Promise<ServerActionResult> => {
   await verifyAdminSession();
 
   const parsedData = userSchema.safeParse(data);
@@ -22,7 +22,7 @@ export async function updateUserAction(
 
   try {
     await updateUser(parsedData.data);
-    revalidatePath("/users/list");
+    revalidateTag("user");
 
     return {
       success: true,
@@ -35,4 +35,4 @@ export async function updateUserAction(
       message: "사용자 정보 업데이트 중 오류가 발생했습니다.",
     };
   }
-}
+};

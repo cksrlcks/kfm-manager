@@ -55,6 +55,7 @@ export default function EditDialog({ user, children }: EditDialogProps) {
       position: user.position || undefined,
       role: user.role || ROLES.USER,
       confirmed: user.confirmed,
+      display: user.display,
     },
   });
 

@@ -5,13 +5,13 @@ import { ServerActionResult } from "@/types";
 import { Inquiry } from "../type";
 import { deleteContact } from "./dal";
 
-export async function deleteContactAction({
+export const deleteContactAction = async ({
   inquiryId,
   targetSite,
 }: {
   inquiryId: Inquiry["id"];
   targetSite: string;
-}): Promise<ServerActionResult> {
+}): Promise<ServerActionResult> => {
   await verifyAdminSession();
 
   try {
@@ -29,4 +29,4 @@ export async function deleteContactAction({
       message: "삭제 중 오류가 발생했습니다.",
     };
   }
-}
+};
