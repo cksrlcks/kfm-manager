@@ -50,6 +50,20 @@
       "when": 1749263171196,
       "tag": "0006_closed_blue_marvel",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1749314291614,
+      "tag": "0007_gifted_scream",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1749320238995,
+      "tag": "0008_broad_toad",
+      "breakpoints": true
     }
   ]
 }
