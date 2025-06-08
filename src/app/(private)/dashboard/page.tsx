@@ -21,7 +21,7 @@ export default async function DashboardPage() {
         </h2>
         <div className="flex flex-wrap gap-1">
           <Button asChild variant="outline">
-            <Link href="/quotation/create">
+            <Link href="/quotation/add">
               <CirclePlus />
               새로운 견적 생성하기
             </Link>
