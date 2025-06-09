@@ -12,7 +12,8 @@ type NavLinkProps = {
 
 export default function NavLink({ item }: NavLinkProps) {
   const pathname = usePathname();
-  const isActive = pathname.startsWith(item.path);
+  const firstDepth = pathname.split("/")[1] || "";
+  const isActive = firstDepth === item.path.split("/")[1];
   const Icon = icons[item.icon];
 
   return (
