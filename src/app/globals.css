@@ -246,3 +246,7 @@ button {
   border-right: 2px solid #000;
   transform: rotate(45deg);
 }
+
+html:has([data-split-mode="true"]) {
+  overflow: hidden;
+}

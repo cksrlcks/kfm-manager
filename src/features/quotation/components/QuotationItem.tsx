@@ -1,32 +1,18 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { FileText } from "lucide-react";
 import { toast } from "sonner";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/format";
 import { removeQuotationAction } from "../server/action";
 import { Quotation } from "../type";
-import QuotationPreview from "./Preview";
+import { QuotationPreviewDialog } from "./Preview";
+import QuotationDeleteDialog from "./QuotationDeleteDialog";
 
 type QuotationItemProps = {
   quotation: Quotation;
 };
 
 export default function QuotationItem({ quotation }: QuotationItemProps) {
-  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const metaData = [
     {
       label: "견적번호",
@@ -77,44 +63,20 @@ export default function QuotationItem({ quotation }: QuotationItemProps) {
             </div>
           </div>
           <div className="flex items-center gap-1">
-            <Button type="button" onClick={() => setIsPreviewOpen(true)}>
-              보기
-            </Button>
+            <QuotationPreviewDialog data={quotation}>
+              <Button type="button">보기</Button>
+            </QuotationPreviewDialog>
             <Button type="button" variant="outline" asChild>
               <Link href={`/quotation/edit/${quotation.id}`}>수정</Link>
             </Button>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button type="button" variant="outline">
-                  삭제
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>정말 삭제하시겠습니까?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    견적서를 삭제하면 복구할 수 없습니다. 정말로
-                    삭제하시겠습니까?
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>취소</AlertDialogCancel>
-                  <AlertDialogAction onClick={handleDelete}>
-                    삭제
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            <QuotationDeleteDialog onDelete={handleDelete}>
+              <Button type="button" variant="outline">
+                삭제
+              </Button>
+            </QuotationDeleteDialog>
           </div>
         </div>
       </div>
-      {isPreviewOpen && (
-        <QuotationPreview
-          data={quotation}
-          open={isPreviewOpen}
-          onClose={() => setIsPreviewOpen(false)}
-        />
-      )}
     </>
   );
 }
