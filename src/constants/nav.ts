@@ -8,17 +8,17 @@ export const ROOT_MENUS: NavItem[] = [
   },
   {
     label: "내정보",
-    path: "/mypage",
+    path: "/mypage/edit-profile",
     icon: "Settings",
   },
   {
     label: "견적서",
-    path: "/quotation",
+    path: "/quotation/list",
     icon: "ScrollText",
   },
   {
     label: "회원 관리",
-    path: "/users",
+    path: "/users/list",
     icon: "User",
   },
   {
@@ -28,7 +28,7 @@ export const ROOT_MENUS: NavItem[] = [
   },
   {
     label: "문의 관리",
-    path: "/inquiry",
+    path: "/inquiry/kfmblower",
     icon: "Mail",
   },
 ];
