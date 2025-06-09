@@ -18,5 +18,6 @@ export const config = {
     "/quotation/:path*",
     "/users/:path*",
     "/inquiry/:path*",
+    "/blower/:path*",
   ],
 };
