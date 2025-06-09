@@ -16,7 +16,9 @@ export default async function Layout({ children }: PropsWithChildren) {
     <RootLayout>
       <RootLayout.Header>
         <RootLayout.HeaderTop>
-          <Logo />
+          <Link href="/dashboard">
+            <Logo />
+          </Link>
           <div className="flex items-center gap-4">
             <User />
             <div className="flex items-center gap-2">

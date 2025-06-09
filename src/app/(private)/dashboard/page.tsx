@@ -1,22 +1,23 @@
 import Link from "next/link";
 import {
   ArrowUpRight,
+  CircleGauge,
   CirclePlus,
   DraftingCompass,
   Globe,
   Mail,
-  Menu,
+  Star,
 } from "lucide-react";
+import PressureConvertorDialog from "@/components/PressureConvertorDialog";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { SITE_LISTS } from "@/constants/dashboard";
 
-export default async function DashboardPage() {
+export default function DashboardPage() {
   return (
-    <div className="mx-auto w-full max-w-xl">
-      <div className="space-y-5">
+    <div className="bg-muted space-y-4 rounded-md p-6">
+      <div className="bg-background flex-1 space-y-5 rounded-md p-5">
         <h2 className="flex items-center gap-2 font-semibold">
-          <Menu size={16} />
+          <Star size={16} />
           자주사용하는 메뉴
         </h2>
         <div className="flex flex-wrap gap-1">
@@ -44,15 +45,20 @@ export default async function DashboardPage() {
               블로워 선정표
             </Link>
           </Button>
+          <PressureConvertorDialog>
+            <Button variant="outline">
+              <CircleGauge />
+              압력 단위 변환
+            </Button>
+          </PressureConvertorDialog>
         </div>
       </div>
-      <Separator className="my-10" />
-      <div className="space-y-5">
+      <div className="bg-background flex-1 space-y-5 rounded-md p-5">
         <h2 className="flex items-center gap-2 font-semibold">
           <Globe size={16} />
           자주이용하는 사이트
         </h2>
-        <ul className="grid grid-cols-2 gap-3">
+        <ul className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
           {SITE_LISTS.map((item) => (
             <li key={item.label}>
               <a
@@ -62,7 +68,9 @@ export default async function DashboardPage() {
                 className="hover:bg-accent hover:text-accent-foreground flex items-center justify-between gap-2 rounded-md border bg-transparent p-4 transition-colors"
               >
                 <div className="w-[80%]">
-                  <div className="text-sm font-semibold">{item.label}</div>
+                  <div className="overflow-hidden text-sm font-semibold overflow-ellipsis whitespace-nowrap">
+                    {item.label}
+                  </div>
                   <div className="text-muted-foreground overflow-hidden text-xs overflow-ellipsis whitespace-nowrap">
                     {item.url}
                   </div>
