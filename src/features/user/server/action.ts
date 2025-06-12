@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
-import { verifyAdminSession } from "@/lib/dal";
+import { verifySession } from "@/lib/dal";
 import { ServerActionResult } from "@/types";
 import { UserForm, userSchema } from "../type";
 import { updateUser } from "./dal";
@@ -9,7 +9,7 @@ import { updateUser } from "./dal";
 export const updateUserAction = async (
   data: UserForm,
 ): Promise<ServerActionResult> => {
-  await verifyAdminSession();
+  await verifySession();
 
   const parsedData = userSchema.safeParse(data);
 

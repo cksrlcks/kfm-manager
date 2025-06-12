@@ -1,9 +1,9 @@
 import SubHeader from "@/components/layout/SubHeader";
 import ProfileEditForm from "@/features/user/components/ProfileEditForm";
-import { verifyAdminSession } from "@/lib/dal";
+import { verifySession } from "@/lib/dal";
 
 export default async function EditProfilePage() {
-  const session = await verifyAdminSession();
+  const session = await verifySession();
 
   return (
     <>

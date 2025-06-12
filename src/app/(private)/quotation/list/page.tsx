@@ -4,7 +4,6 @@ import Pagination from "@/components/Pagination";
 import QuotationList from "@/features/quotation/components/QuotationList";
 import Searchbar from "@/features/quotation/components/Searchbar";
 import { getQuotations } from "@/features/quotation/server/dal";
-import { verifyAdminSession } from "@/lib/dal";
 import { baseFilterSchema } from "@/types";
 
 export default async function ListPage({
@@ -19,8 +18,6 @@ export default async function ListPage({
   }
 
   const { page = 1, limit = 10, keyword } = parsed.data;
-
-  await verifyAdminSession();
 
   const data = await getQuotations({
     page,

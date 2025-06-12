@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { signinAction } from "../server/action";
+import { permissionCheckAction, signinAction } from "../server/action";
 import { LoginForm as LoginFormType, LoginSchema } from "../type";
 
 export default function LoginForm() {
@@ -30,12 +30,18 @@ export default function LoginForm() {
   });
 
   const handleSubmit = form.handleSubmit(async (data) => {
-    const response = await signinAction(data);
-    if (response.success) {
-      toast.success(response.message);
-      router.replace("/");
+    const loginResponse = await signinAction(data);
+
+    if (loginResponse.success) {
+      const permissionResponse = await permissionCheckAction();
+      if (permissionResponse.success) {
+        toast.success(permissionResponse.message);
+        router.replace("/");
+      } else {
+        toast.error(permissionResponse.message);
+      }
     } else {
-      toast.error(response.message);
+      toast.error(loginResponse.message);
     }
   });
 

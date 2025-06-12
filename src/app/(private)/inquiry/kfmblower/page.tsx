@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/table";
 import InquiryDialog from "@/features/inquiry/components/InquiryDialog";
 import { getContactList } from "@/features/inquiry/server/dal";
-import { verifyAdminSession } from "@/lib/dal";
 import { formatDate } from "@/lib/format";
 import { baseFilterSchema } from "@/types";
 
@@ -27,8 +26,6 @@ export default async function InquiryPage({
   }
 
   const { page = 1, limit = 10 } = parsed.data;
-
-  await verifyAdminSession();
 
   const data = await getContactList({
     page,

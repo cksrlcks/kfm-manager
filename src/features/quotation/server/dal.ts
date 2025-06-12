@@ -6,6 +6,7 @@ import utc from "dayjs/plugin/utc";
 import { count, eq, ilike, or, sql } from "drizzle-orm";
 import { db } from "@/db";
 import { quotationDefaultSettings, quotations, user } from "@/db/schema";
+import { verifySession } from "@/lib/dal";
 import { BaseFilter } from "@/types";
 import { Quotation, QuotationDefaultSettingForm, QuotationForm } from "../type";
 
@@ -17,6 +18,8 @@ const generateQuotNo = () => {
 };
 
 export const addQuotation = async (data: QuotationForm) => {
+  await verifySession();
+
   const quot_no = generateQuotNo();
 
   return await db
@@ -29,6 +32,8 @@ export const updateQuotation = async (
   id: Quotation["id"],
   data: QuotationForm,
 ) => {
+  await verifySession();
+
   return await db
     .update(quotations)
     .set(data)
@@ -36,7 +41,7 @@ export const updateQuotation = async (
     .returning({ id: quotations.id });
 };
 
-export const getQuotations = unstable_cache(
+const getQuotationsCached = unstable_cache(
   async (params: BaseFilter) => {
     const { page = 1, limit = 10, keyword } = params;
     const condition = keyword
@@ -69,7 +74,13 @@ export const getQuotations = unstable_cache(
   },
 );
 
-export const getQuotation = unstable_cache(
+export const getQuotations = async (params: BaseFilter) => {
+  await verifySession();
+
+  return getQuotationsCached(params);
+};
+
+const getQuotationCached = unstable_cache(
   async (id: Quotation["id"]) => {
     return (await db.query.quotations.findFirst({
       where: eq(quotations.id, id),
@@ -81,11 +92,19 @@ export const getQuotation = unstable_cache(
   },
 );
 
+export const getQuotation = async (id: Quotation["id"]) => {
+  await verifySession();
+
+  return getQuotationCached(id);
+};
+
 export const removeQuotation = async (id: Quotation["id"]) => {
+  await verifySession();
+
   return await db.delete(quotations).where(eq(quotations.id, id));
 };
 
-export const getDefaultSetting = unstable_cache(
+const getDefaultSettingCached = unstable_cache(
   async () => {
     return await db.query.quotationDefaultSettings.findFirst({
       where: eq(quotationDefaultSettings.id, 1),
@@ -97,7 +116,12 @@ export const getDefaultSetting = unstable_cache(
   },
 );
 
-export const getEmployees = unstable_cache(
+export const getDefaultSetting = async () => {
+  await verifySession();
+  return getDefaultSettingCached();
+};
+
+const getEmployeesCached = unstable_cache(
   async () => {
     return await db.query.user.findMany({
       where: eq(user.display, true),
@@ -114,9 +138,17 @@ export const getEmployees = unstable_cache(
   },
 );
 
+export const getEmployees = async () => {
+  await verifySession();
+
+  return getEmployeesCached();
+};
+
 export const updateDefaultSettings = async (
   data: QuotationDefaultSettingForm,
 ) => {
+  await verifySession();
+
   const existing = await db.query.quotationDefaultSettings.findFirst({
     where: (fields) => eq(fields.id, 1),
   });

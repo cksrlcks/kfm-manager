@@ -1,7 +1,7 @@
 import SubHeader from "@/components/layout/SubHeader";
 import ChangePasswordForm from "@/features/user/components/ChangePasswordForm";
 
-export default async function ChangePasswordPage() {
+export default function ChangePasswordPage() {
   return (
     <>
       <SubHeader>

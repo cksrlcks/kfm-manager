@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
-import { verifyAdminSession } from "@/lib/dal";
+import { verifySession } from "@/lib/dal";
 import { ServerActionResult } from "@/types";
 import {
   Quotation,
@@ -19,7 +19,7 @@ import {
 export const addQuotationAction = async (
   data: QuotationForm,
 ): Promise<ServerActionResult> => {
-  await verifyAdminSession();
+  await verifySession();
 
   const parsed = quotationSchema.safeParse(data);
 
@@ -103,7 +103,7 @@ export const removeQuotationAction = async (id: Quotation["id"]) => {
 export const updateDefaultSettingAction = async (
   data: QuotationDefaultSettingForm,
 ) => {
-  await verifyAdminSession();
+  await verifySession();
 
   try {
     await updateDefaultSettings(data);

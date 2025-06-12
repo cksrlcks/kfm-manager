@@ -1,8 +1,9 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
+import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
-import { ServerActionResult } from "@/types";
+import { ROLES, ServerActionResult } from "@/types";
 import {
   FindPasswordForm,
   FindPasswordSchema,
@@ -78,6 +79,46 @@ export const signinAction = async (
         error instanceof Error ? error.message : "로그인에 실패했습니다.",
     };
   }
+};
+
+export const permissionCheckAction = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    return {
+      success: false,
+      message: "로그인이 필요합니다.",
+    };
+  }
+
+  if (session.user.role !== ROLES.ADMIN) {
+    await auth.api.signOut({
+      headers: await headers(),
+    });
+
+    return {
+      success: false,
+      message: "관리자 권한이 필요합니다.",
+    };
+  }
+
+  if (!session.user.confirmed) {
+    await auth.api.signOut({
+      headers: await headers(),
+    });
+
+    return {
+      success: false,
+      message: "승인된 관리자만 접근할 수 있습니다.",
+    };
+  }
+
+  return {
+    success: true,
+    message: "권한 확인이 완료되었습니다.",
+  };
 };
 
 export const forgetPasswordAction = async (

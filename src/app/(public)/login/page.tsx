@@ -5,13 +5,14 @@ import { Separator } from "@/components/ui/separator";
 import AuthForm from "@/features/auth/components/AuthForm";
 import LoginForm from "@/features/auth/components/LoginForm";
 import { auth } from "@/lib/auth";
+import { ROLES } from "@/types";
 
 export default async function LoginPage() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
-  if (session) {
+  if (session && session.user.role === ROLES.ADMIN && session.user.confirmed) {
     redirect("/dashboard");
   }
 

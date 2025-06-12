@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default async function QuotationPage() {
+export default function QuotationPage() {
   redirect("/quotation/list");
 }

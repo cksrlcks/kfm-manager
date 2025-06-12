@@ -1,4 +1,5 @@
 import "server-only";
+import { verifySession } from "@/lib/dal";
 import { InquiryResponse } from "../type";
 
 export const getContactList = async ({
@@ -10,6 +11,8 @@ export const getContactList = async ({
   limit: number;
   targetSite: string;
 }) => {
+  await verifySession();
+
   const targetAPIUrl =
     targetSite === "kfmblower"
       ? process.env.KFMBLOWER_API_URL
@@ -37,6 +40,8 @@ export const getContactList = async ({
 };
 
 export const deleteContact = async (id: string, targetSite: string) => {
+  await verifySession();
+
   const targetAPIUrl =
     targetSite === "kfmblower"
       ? process.env.KFMBLOWER_API_URL

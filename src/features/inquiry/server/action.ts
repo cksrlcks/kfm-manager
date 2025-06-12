@@ -1,6 +1,6 @@
 "use server";
 
-import { verifyAdminSession } from "@/lib/dal";
+import { verifySession } from "@/lib/dal";
 import { ServerActionResult } from "@/types";
 import { Inquiry } from "../type";
 import { deleteContact } from "./dal";
@@ -12,7 +12,7 @@ export const deleteContactAction = async ({
   inquiryId: Inquiry["id"];
   targetSite: string;
 }): Promise<ServerActionResult> => {
-  await verifyAdminSession();
+  await verifySession();
 
   try {
     await deleteContact(inquiryId, targetSite);
