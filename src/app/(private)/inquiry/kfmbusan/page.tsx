@@ -60,7 +60,7 @@ export default async function InquiryPage({
         </TableHeader>
         <TableBody>
           {data.items.map((item) => (
-            <InquiryDialog key={item.id} inquiry={item} targetSite="kfmblower">
+            <InquiryDialog key={item.id} inquiry={item} targetSite="kfmbusan">
               <TableRow>
                 <TableCell className="overflow-hidden text-ellipsis whitespace-nowrap">
                   {item.id}
